@@ -25,6 +25,7 @@ body{
 .header{
   margin-top: 7vh;
   padding: 1rem;
+  display: none;
 }
 
 .header .title{
@@ -45,10 +46,44 @@ body{
   font-size: 2rem;
   color: var(--secondary-color);
 }
-.header,.input{
+.header,.input ,.chat-list{
   max-width: 1000px;
   margin: 0 auto;
 }
+/* chatlist styling  */
+.chat-list .message  .avatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: fill;
+  margin-right: 1rem;
+}
+
+
+.chat-list .message .message-outgoing{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ color: var(--text-color);
+ padding: 1rem;
+ font-weight: bold;
+ 
+}
+.chat-list .message .message-incoming{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-color);
+  padding: 1rem;
+  font-weight: bold;
+}
+.chat-list .message .text{
+  font-size: .95rem;
+}
+
+
+
+
 .suggestion-list{
   margin-top: 10vh;
   display: flex;
