@@ -133,7 +133,7 @@ body{
   display: none;
 }
 .chat-list .message.loading .avatar{
-  animation: rotates 3s linear infinite;
+  animation: rotates 3s linear feat: add loading message structure and stylesinfinite;
 }
 @keyframes rotates {
   100%{
