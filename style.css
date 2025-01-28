@@ -94,13 +94,54 @@ body{
   visibility: hidden;
 
 }
-.chat-list .message:hover .icon{
+.chat-list .message:not(.loading):hover .icon{
   visibility: visible;
 }
 .chat-list .message .icon:hover{
   background: var(--secondary-hover-color);
 }
+.chat-list .message.loading .loading-bar{
+  height: 10px;
+  background: linear-gradient(to right,#4285f4,var(--primary-color),#4285f4);
+  width: 100%;
+  animation: animate 3s linear infinite;
+  
+}
+.chat-list .message.loading .loading-list .loading-bar:last-child{
+  width: 70%;
+ 
+}
+.chat-list .message.loading .loading-list{
 
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: .8rem;
+ 
+}
+@keyframes animate {
+  0%{
+    background-position: -800px 0;
+  }
+  100%{
+    background-position: 800px 0;
+  }
+  
+}
+
+.chat-list .message.loading .message-incoming .text{
+  display: none;
+}
+.chat-list .message.loading .avatar{
+  animation: rotates 3s linear infinite;
+}
+@keyframes rotates {
+  100%{
+    transform: rotate(360deg);
+    /* for degree it is deg */
+  }
+  
+}
 
 
 
