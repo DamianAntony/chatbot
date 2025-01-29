@@ -62,7 +62,6 @@ body{
 
 .chat-list .message .message-outgoing{
  display: flex;
- justify-content: center;
  align-items: center;
  color: var(--text-color);
  padding: 1rem;
@@ -133,7 +132,7 @@ body{
   display: none;
 }
 .chat-list .message.loading .avatar{
-  animation: rotates 3s linear feat: add loading message structure and stylesinfinite;
+  animation: rotates 3s linear infinite;
 }
 @keyframes rotates {
   100%{
@@ -204,6 +203,7 @@ position: relative;
 .input-textarea .input-placeholder{
   width: 100%;
   height: 100%;
+  
  
 }
 .input-textarea .input-wrapper{
