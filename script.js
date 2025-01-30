@@ -9,6 +9,42 @@ const createmessageelement = (content, ...classes) => {
   div.innerHTML = content;
   return div;
 }
+const YOUR_API_KEY="AIzaSyAbZ493cC_n3J1qZJfu7kljAqarairWeno"
+
+const apiUrl=`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${YOUR_API_KEY}`
+
+const getApiResponse= async (incomingmessage)=>{
+
+try {
+  const response = await fetch(apiUrl,{
+    method:"POST",
+    headers:{"Content-Type": "application/json"},
+    body: JSON.stringify({
+      contents:[{
+        parts:[{
+          text:usermessage
+        }]
+      }]
+    })
+
+  })
+
+  const data=await response.json();
+  const apiresponse= data.candidates[0].content.parts[0].text;
+  console.log(data)
+  console.log(apiresponse);
+  incomingmessage.querySelector(".text").innerHTML=apiresponse;
+
+
+}catch(error){
+  console.log(error);
+  
+}finally{
+  incomingmessage.classList.remove("loading")
+}
+
+
+}
 
 const showloadinganimation=()=>{
   const html = `   <div class="message-incoming">
@@ -25,6 +61,7 @@ const showloadinganimation=()=>{
   const incomingmessage = createmessageelement(html, "message","loading");
  
   chatList.appendChild(incomingmessage);
+  getApiResponse(incomingmessage);
 
 }
 

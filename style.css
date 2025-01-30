@@ -60,6 +60,7 @@ body{
 }
 
 
+
 .chat-list .message .message-outgoing{
  display: flex;
  align-items: center;
@@ -70,8 +71,7 @@ body{
 }
 .chat-list .message .message-incoming{
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   color: var(--text-color);
   padding: 1rem;
   font-weight: bold;
@@ -192,7 +192,7 @@ position: relative;
   right: 1rem;
 }
 .input-textarea{
-  position: fixed;
+  position: sticky;
   bottom: 0;
   width: 100%;
 }
@@ -206,6 +206,11 @@ position: relative;
   
  
 }
+.input-placeholder:focus {
+  background: var(--secondary-hover-color);
+  color: white;
+}
+
 .input-textarea .input-wrapper{
   width: 100%;
   display: flex;
