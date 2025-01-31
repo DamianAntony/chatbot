@@ -51,6 +51,12 @@ body{
   margin: 0 auto;
 }
 /* chatlist styling  */
+.chat-list {
+
+  margin-bottom: 20vh;
+
+ 
+}
 .chat-list .message  .avatar{
   width: 40px;
   height: 40px;
@@ -75,6 +81,7 @@ body{
   color: var(--text-color);
   padding: 1rem;
   font-weight: bold;
+  
 }
 .chat-list .message .text{
   font-size: .95rem;
@@ -192,7 +199,7 @@ position: relative;
   right: 1rem;
 }
 .input-textarea{
-  position: sticky;
+  position: fixed;
   bottom: 0;
   width: 100%;
 }

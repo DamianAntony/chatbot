@@ -13,8 +13,24 @@ const YOUR_API_KEY="AIzaSyAbZ493cC_n3J1qZJfu7kljAqarairWeno"
 
 const apiUrl=`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${YOUR_API_KEY}`
 
-const getApiResponse= async (incomingmessage)=>{
+const showtypingtext=(text,textElement)=>{
+  const words = text.split(' ');
+  let currentindex=0;
+  textElement.innerHTML="";
+  const typinginterval= setInterval(() => {
+    textElement.innerHTML+=(currentindex===0?'':' ')+words[currentindex++]
+    
+    if(currentindex===words.length){
+      clearInterval(typinginterval)
+    }
+  }, 75);
+  
 
+}
+
+
+const getApiResponse= async (incomingmessage)=>{
+const textElement = incomingmessage.querySelector(".text");
 try {
   const response = await fetch(apiUrl,{
     method:"POST",
@@ -33,7 +49,7 @@ try {
   const apiresponse= data.candidates[0].content.parts[0].text;
   console.log(data)
   console.log(apiresponse);
-  incomingmessage.querySelector(".text").innerHTML=apiresponse;
+  showtypingtext(apiresponse,textElement);
 
 
 }catch(error){
