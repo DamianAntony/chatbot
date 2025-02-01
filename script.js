@@ -17,7 +17,7 @@ const apiUrl=`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5
 
 const showtypingtext=(text,textElement)=>{
   textElement.innerHTML= "";
-  
+
   if (window.marked) {
     text = marked.parse(text);
   }
