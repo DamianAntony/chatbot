@@ -2,6 +2,8 @@
 const typingform = document.querySelector(".input")
 const chatList = document.querySelector(".chat-list")
 
+
+
 let usermessage = null;
 const createmessageelement = (content, ...classes) => {
   const div = document.createElement("div");
@@ -25,6 +27,16 @@ const showtypingtext=(text,textElement)=>{
     }
   }, 75);
   
+
+}
+
+const copyContent=(copyBtn)=>{
+  const textcontent = copyBtn.parentElement.querySelector(".text").innerText;
+  navigator.clipboard.writeText(textcontent)
+  copyBtn.innerText="done";
+  setTimeout(() => {
+    copyBtn.innerText="content_copy"
+  }, 1000);
 
 }
 
@@ -73,7 +85,7 @@ const showloadinganimation=()=>{
             <div class="loading-bar"></div>
           </div>
         </div>
-        <span class="icon material-symbols-rounded">content_copy</span>`;
+        <span class="icon material-symbols-rounded" onclick="copyContent(this)">content_copy</span>`;
   const incomingmessage = createmessageelement(html, "message","loading");
  
   chatList.appendChild(incomingmessage);
