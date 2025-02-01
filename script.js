@@ -16,9 +16,14 @@ const YOUR_API_KEY="AIzaSyAbZ493cC_n3J1qZJfu7kljAqarairWeno"
 const apiUrl=`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${YOUR_API_KEY}`
 
 const showtypingtext=(text,textElement)=>{
+  textElement.innerHTML= "";
+  
+  if (window.marked) {
+    text = marked.parse(text);
+  }
   const words = text.split(' ');
   let currentindex=0;
-  textElement.innerHTML="";
+ 
   const typinginterval= setInterval(() => {
     textElement.innerHTML+=(currentindex===0?'':' ')+words[currentindex++]
     
