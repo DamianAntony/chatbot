@@ -1,6 +1,7 @@
 // Gemini Chatbot
 const typingform = document.querySelector(".input")
 const chatList = document.querySelector(".chat-list")
+const toggleButton=document.querySelector("#toggle_theme_button")
 
 
 
@@ -15,11 +16,28 @@ const YOUR_API_KEY="AIzaSyAbZ493cC_n3J1qZJfu7kljAqarairWeno"
 
 const apiUrl=`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${YOUR_API_KEY}`
 
+
+const localStorageData=()=>{
+  const islightMode = (localStorage.getItem("themebutton")==="dark_mode");
+ document.body.classList.toggle("light_mode",islightMode);
+ toggleButton.innerText= islightMode?"dark_mode":"light_mode";
+const savedChats = localStorage.getItem("savedChats")
+// restore saved chats
+
+  chatList.innerHTML = savedChats|| "";
+
+ 
+}
+
+
+localStorageData();
+
+
 const showtypingtext=(text,textElement)=>{
   textElement.innerHTML= "";
 
   if (window.marked) {
-    text = marked.parse(text);
+    text = marked.parse(text);// for giving necessary spacing and all
   }
   const words = text.split(' ');
   let currentindex=0;
@@ -29,6 +47,7 @@ const showtypingtext=(text,textElement)=>{
     
     if(currentindex===words.length){
       clearInterval(typinginterval)
+      localStorage.setItem("savedChats", chatList.innerHTML);
     }
   }, 75);
   
@@ -114,8 +133,13 @@ const handleoutgoingmessage = () => {
   typingform.reset();//clear input field
   setTimeout(showloadinganimation,500);
 
-
 }
+
+toggleButton.addEventListener("click",()=>{
+const islightMode=document.body.classList.toggle("light_mode");
+toggleButton.innerText= islightMode?"dark_mode":"light_mode";
+localStorage.setItem("themebutton",islightMode?"dark_mode":"light_mode")
+})
 typingform.addEventListener("submit", (e) => {
   e.preventDefault();
 
