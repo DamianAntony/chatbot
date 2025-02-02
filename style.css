@@ -26,6 +26,7 @@
 
 body{
   background: var(--primary-color);
+  
 }
 .header , .input-textarea{
   color: var(--text-color);
@@ -60,39 +61,50 @@ body{
 }
 /* chatlist styling  */
 .chat-list {
+padding: 2rem 1rem 12rem;
+max-height: 100vh;
+overflow-y: auto;
 
-  margin-bottom: 20vh;
-
+ 
+}
+.chat-list .message {
+ max-width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
  
 }
 .chat-list .message  .avatar{
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  object-fit: fill;
+  object-fit: cover;
+  align-self: flex-start;
   margin-right: 1rem;
 }
+
 
 
 
 .chat-list .message .message-outgoing{
  display: flex;
  align-items: center;
- color: var(--text-color);
- padding: 1rem;
- font-weight: bold;
+
+width: 100%;
+ gap: 1.5rem;
  
 }
 .chat-list .message .message-incoming{
   display: flex;
   align-items: flex-start;
-  color: var(--text-color);
-  padding: 1rem;
-  font-weight: bold;
+  width: 100%;
+  gap: 1.5rem;
+  
+  
+ 
   
 }
 .chat-list .message .text{
-  font-size: .95rem;
+color: var(--text-color);
 }
 .chat-list .message .icon{
   width: 35px;
@@ -103,11 +115,16 @@ body{
   color: var(--text-color);
   background:var(--secondary-color);
   border-radius: 50%;
-  margin-left: 3rem;
+  margin-left: 3.5rem;
   cursor: pointer;
   visibility: hidden;
 
 }
+.chat-list::-webkit-scrollbar {
+  width: 8px;
+  
+}
+
 .chat-list .message:not(.loading):hover .icon{
   visibility: visible;
 }

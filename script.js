@@ -30,7 +30,7 @@ const savedChats = localStorage.getItem("savedChats")
 }
 
 
-localStorageData();
+// localStorageData();
 
 
 const showtypingtext=(text,textElement)=>{
@@ -83,9 +83,13 @@ try {
 
   const data=await response.json();
   const apiresponse= data.candidates[0].content.parts[0].text;
+  const formattedText = apiresponse
+  .replace(/\*(?!\*)(.*?)\*/g, '$1') // Remove single asterisks but keep **bold**
+  .replace(/\n/g, '<br>')            // Convert newlines to <br> for HTML rendering
+  .replace(/\s+/g, ' ');
   console.log(data)
   console.log(apiresponse);
-  showtypingtext(apiresponse,textElement);
+  showtypingtext(formattedText,textElement);
 
 
 }catch(error){
