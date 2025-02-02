@@ -125,7 +125,7 @@ color: var(--text-color);
   
 }
 
-.chat-list .message:not(.loading):hover .icon{
+.chat-list .message:not(.loading):hover .icon:not(.hide){
   visibility: visible;
 }
 .chat-list .message .icon:hover{

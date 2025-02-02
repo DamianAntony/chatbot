@@ -26,29 +26,33 @@ const savedChats = localStorage.getItem("savedChats")
 
   chatList.innerHTML = savedChats|| "";
 
- 
+  chatList.scrollTo(0,chatList.scrollHeight)
 }
 
 
 // localStorageData();
 
 
-const showtypingtext=(text,textElement)=>{
+const showtypingtext=(text,textElement,incomingmessage)=>{
   textElement.innerHTML= "";
 
-  if (window.marked) {
-    text = marked.parse(text);// for giving necessary spacing and all
-  }
+  // if (window.marked) {
+  //   text = marked.parse(text);// for giving necessary spacing and all
+  // }
   const words = text.split(' ');
   let currentindex=0;
  
   const typinginterval= setInterval(() => {
     textElement.innerHTML+=(currentindex===0?'':' ')+words[currentindex++]
+    incomingmessage.querySelector('.icon').classList.add("hide")
     
     if(currentindex===words.length){
       clearInterval(typinginterval)
       localStorage.setItem("savedChats", chatList.innerHTML);
+      incomingmessage.querySelector('.icon').classList.remove("hide")
+
     }
+    chatList.scrollTo(0,chatList.scrollHeight)
   }, 75);
   
 
@@ -89,7 +93,7 @@ try {
   .replace(/\s+/g, ' ');
   console.log(data)
   console.log(apiresponse);
-  showtypingtext(formattedText,textElement);
+  showtypingtext(formattedText,textElement,incomingmessage);
 
 
 }catch(error){
@@ -118,7 +122,7 @@ const showloadinganimation=()=>{
  
   chatList.appendChild(incomingmessage);
   getApiResponse(incomingmessage);
-
+  chatList.scrollTo(0,chatList.scrollHeight)
 }
 
 
