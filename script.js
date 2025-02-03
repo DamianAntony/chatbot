@@ -28,6 +28,8 @@ const savedChats = localStorage.getItem("savedChats")
   chatList.innerHTML = savedChats|| "";
 
   chatList.scrollTo(0,chatList.scrollHeight)
+  document.body.classList.toggle("hide-header",savedChats)
+  //sytax for toggle(className, condition)
 }
 
 
@@ -147,7 +149,7 @@ const handleoutgoingmessage = () => {
   const incomingmessage = createmessageelement(html, "message");
   incomingmessage.querySelector(".text").innerHTML = usermessage;
   chatList.appendChild(incomingmessage);
-
+  document.body.classList.add("hide-header")
   typingform.reset();//clear input field
   setTimeout(showloadinganimation,500);
 
