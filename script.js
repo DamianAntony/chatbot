@@ -3,10 +3,13 @@ const typingform = document.querySelector(".input")
 const chatList = document.querySelector(".chat-list")
 const toggleButton=document.querySelector("#toggle_theme_button")
 const deleteButton=document.querySelector("#delete-button")
-
+const suggestions = document.querySelectorAll(".suggestion-list .suggestion")
 
 
 let usermessage = null;
+let isgenerating = false;
+
+
 const createmessageelement = (content, ...classes) => {
   const div = document.createElement("div");
   div.classList.add(...classes);
@@ -35,6 +38,14 @@ const savedChats = localStorage.getItem("savedChats")
 
 localStorageData();
 
+suggestions.forEach(suggestion=>{
+  suggestion.addEventListener("click",()=>{
+    usermessage=suggestion.querySelector(".text").innerText;
+    handleoutgoingmessage();
+
+  })
+})
+
 
 const showtypingtext=(text,textElement,incomingmessage)=>{
   textElement.innerHTML= "";
@@ -50,12 +61,13 @@ const showtypingtext=(text,textElement,incomingmessage)=>{
     incomingmessage.querySelector('.icon').classList.add("hide")
     
     if(currentindex===words.length){
+      isgenerating = true;
       clearInterval(typinginterval)
       localStorage.setItem("savedChats", chatList.innerHTML);
       incomingmessage.querySelector('.icon').classList.remove("hide")
-
+     chatList.scrollTo(0,chatList.scrollHeight)
+     
     }
-    chatList.scrollTo(0,chatList.scrollHeight)
   }, 75);
   
 
@@ -109,6 +121,7 @@ try {
 
 
 }catch(error){
+  isgenerating = false;
   console.log(error);
   
 }finally{
@@ -139,8 +152,9 @@ const showloadinganimation=()=>{
 
 
 const handleoutgoingmessage = () => {
-  usermessage = typingform.querySelector(".input-placeholder").value.trim();
-  if (!usermessage) return;//return when no input in the form
+  usermessage = typingform.querySelector(".input-placeholder").value.trim()||usermessage;
+  if (!usermessage|| isgenerating) return;//return when no input in the form
+  isgenerating = true;
   const html = `   <div class="message-outgoing">
         <img src="./images/user.jpg" alt="user-image" class="avatar">
         <p class="text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio laudantium tenetur fugit dolores. Cumque delectus, commodi earum quia id quod exercitationem doloribus itaque ea laborum voluptas officia maiores ad ducimus!
