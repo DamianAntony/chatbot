@@ -2,6 +2,7 @@
 const typingform = document.querySelector(".input")
 const chatList = document.querySelector(".chat-list")
 const toggleButton=document.querySelector("#toggle_theme_button")
+const deleteButton=document.querySelector("#delete-button")
 
 
 
@@ -30,7 +31,7 @@ const savedChats = localStorage.getItem("savedChats")
 }
 
 
-// localStorageData();
+localStorageData();
 
 
 const showtypingtext=(text,textElement,incomingmessage)=>{
@@ -57,6 +58,15 @@ const showtypingtext=(text,textElement,incomingmessage)=>{
   
 
 }
+// delete the entire chat
+deleteButton.addEventListener("click",()=>{
+  if(confirm("are you sure to delete all the chats?")){
+    localStorage.removeItem("savedChats")
+    localStorageData();
+  }
+  
+
+})
 
 const copyContent=(copyBtn)=>{
   const textcontent = copyBtn.parentElement.querySelector(".text").innerText;
